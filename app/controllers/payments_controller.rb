@@ -5,6 +5,10 @@ class PaymentsController < ApplicationController
                    amount: params[:payments][:amount],
                    sale_id: params[:payments][:sale_id])
 
+
+    fiscalizer = Fiscalizer.new
+
+    logger.info('making')
     respond_to do |format|
       format.js
     end
