@@ -8,11 +8,27 @@ class PaymentsController < ApplicationController
 
     if(params[:payments][:payment_type]== 'credit_card')
        logger.info('redirect user to internet payment gateway')
-       fiscalizer = Fiscalizer.new
-       logger.info(fake_ipg_authorization)
-    elsif(params[:payments][:payment_type]== 'cash')
        logger.info('fisiclize invoice')
        fiscalizer = Fiscalizer.new
+       logger.info(fake_ipg_authorization)
+       Invoice.create(payment_type: params[:payments][:payment_type],
+                      amount: params[:payments][:amount],
+                      sale_id: params[:payments][:sale_id], authorization_number: fake_ipg_authorization,
+                      uuid: SecureRandom.uuid,unique_identifier: SecureRandom.hex)
+
+
+    elsif(params[:payments][:payment_type]== 'cash')
+      #duplicate code, but in the ipg scenario, if the
+      #authorization was rejected, the invoices would not be generated
+      #while in the cash scenarion the invoices is always generated
+       logger.info('fisiclize invoice')
+       fiscalizer = Fiscalizer.new
+       Invoice.create(payment_type: params[:payments][:payment_type],
+                      amount: params[:payments][:amount],
+                      sale_id: params[:payments][:sale_id], authorization_number: fake_ipg_authorization,
+                      uuid: SecureRandom.uuid,unique_identifier: SecureRandom.hex)
+
+
     else
       logger.info('wait for the back office to clear the payment')
     end

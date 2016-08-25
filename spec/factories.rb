@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :invoice do
+    
+  end
   factory :account do
     email { Faker::Internet.email }
     password 'password'
