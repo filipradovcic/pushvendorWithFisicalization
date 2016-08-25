@@ -8,16 +8,19 @@ class PaymentsController < ApplicationController
 
     if(params[:payments][:payment_type]== 'credit_card')
        logger.info('redirect user to internet payment gateway')
+       fiscalizer = Fiscalizer.new
+       logger.info(fake_ipg_authorization)
     elsif(params[:payments][:payment_type]== 'cash')
        logger.info('fisiclize invoice')
+       fiscalizer = Fiscalizer.new
     else
       logger.info('wait for the back office to clear the payment')
     end
 
 
-    fiscalizer = Fiscalizer.new
 
-    logger.info('Fizicaling invoice')
+
+
 
 
     respond_to do |format|
@@ -29,5 +32,11 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:payment_type, :amount, :sale_id)
+  end
+
+
+  def fake_ipg_authorization
+
+    return Random.new.rand(100000..999999)
   end
 end
