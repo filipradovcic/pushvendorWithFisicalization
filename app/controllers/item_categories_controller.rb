@@ -1,6 +1,6 @@
 class ItemCategoriesController < ApplicationController
   before_action :set_item_category, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   def index
     @item_categories = ItemCategory.paginate(page: params[:page], per_page: 20)
   end

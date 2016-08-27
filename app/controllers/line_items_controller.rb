@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   def index
     @line_items = LineItem.all
   end

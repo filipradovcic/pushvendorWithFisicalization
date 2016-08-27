@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @customers = Customer.paginate(page: params[:page], per_page: 20).where(published: true)

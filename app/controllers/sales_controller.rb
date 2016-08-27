@@ -1,5 +1,6 @@
 class SalesController < ApplicationController
   before_action :set_configurations
+  load_and_authorize_resource
 
   def index
     @sales = Sale.paginate(page: params[:page], per_page: 2).order('id DESC')
