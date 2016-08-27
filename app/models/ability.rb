@@ -3,25 +3,38 @@ class Ability
 
   def initialize(user)
 
-    if user.can_update_configuration == true
-        can :manage, StoreConfiguration
-    end
+    # if user.can_update_configuration == true
+    #     can :manage, StoreConfiguration
+    # end
+    #
+    # if user.can_update_users == true
+    #     can :manage, User
+    # end
+    #
+    # if user.can_view_reports == true
+    #     # can :manage, Report
+    # end
+    #
+    # if user.can_update_sale_discount == true
+    # end
 
-    if user.can_update_users == true
-        can :manage, User
-    end
 
-    if user.can_view_reports == true
-        # can :manage, Report
-    end
 
-    if user.can_update_sale_discount == true
-    end
+    can :manage, :all if user.role == "super_admin"
 
-    if user.can_remove_sales == true
-        can :manage, Sale
-    end
+    can :manage, Item if user.role == "item_admin"
 
+    can :update, Item if user.role == "item_manager"
+
+    can :read, Item if user.role == "item_viewer"
+
+    can :manage, Sale if user.role == "sale_admin"
+
+    can :manage, Customer if user.role == "sale_manager"
+
+    can :update, Sale if user.role == "sale_manager"
+
+    can :read, Sale if user.role == "sale_viewer"
 
 
     # Define abilities for the passed in user here. For example:

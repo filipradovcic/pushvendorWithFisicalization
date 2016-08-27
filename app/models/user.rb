@@ -7,4 +7,10 @@ class User < ActiveRecord::Base
 
   validates :username, :presence => true, :uniqueness => true
 
+
+    ROLES = %i[super_admin sale_admin item_admin sale_manager item_manager sale_viewer item_viewer]
+
+
+
+
 end
