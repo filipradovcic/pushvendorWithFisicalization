@@ -24,15 +24,10 @@ class Ability
 
     can :manage, [Item, ItemCategory] if user.role == "item_admin"
 
-    can [:create, :update, :read], [Item, ItemCategory] if user.role == "item_manager"
-
-    can :read, [Item, ItemCategory] if user.role == "item_viewer"
-
     can :manage, [Sale,Customer] if user.role == "sale_admin"
 
-    can [:create, :update, :read], [Sale,Customer] if user.role == "sale_manager"
 
-    can :read, [Sale,Customer] if user.role == "sale_viewer"
+
 
 
     # Define abilities for the passed in user here. For example:
