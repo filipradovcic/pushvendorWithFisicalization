@@ -22,19 +22,17 @@ class Ability
 
     can :manage, :all if user.role == "super_admin"
 
-    can :manage, Item if user.role == "item_admin"
+    can :manage, [Item, ItemCategory] if user.role == "item_admin"
 
-    can :update, Item if user.role == "item_manager"
+    can [:create, :update, :read], [Item, ItemCategory] if user.role == "item_manager"
 
-    can :read, Item if user.role == "item_viewer"
+    can :read, [Item, ItemCategory] if user.role == "item_viewer"
 
-    can :manage, Sale if user.role == "sale_admin"
+    can :manage, [Sale,Customer] if user.role == "sale_admin"
 
-    can :manage, Customer if user.role == "sale_manager"
+    can [:create, :update, :read], [Sale,Customer] if user.role == "sale_manager"
 
-    can :update, Sale if user.role == "sale_manager"
-
-    can :read, Sale if user.role == "sale_viewer"
+    can :read, [Sale,Customer] if user.role == "sale_viewer"
 
 
     # Define abilities for the passed in user here. For example:

@@ -31,61 +31,18 @@
             <%= f.text_field :password, :class => "form-control", :placeholder => "Secret Password", :type => "password" %>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-    <label>Select role</label>
-    <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %>
-
-
-  <% unless @user.id.blank? || @user.id == 1 %>
-    <div class="panel panel-default">
-      <div class="panel-heading">Permissions</div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :can_update_configuration %>
-                Can change store configuration
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :can_update_users %>
-                Can update users
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :can_update_items %>
-                Can update items
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :can_view_reports %>
-                Can view reports
-              </label>
-            </div>
-            <!-- <div class="checkbox">
-              <label>
-                <%= f.check_box :can_update_sale_discount %>
-                Can give discounts
-              </label>
-            </div> -->
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :can_remove_sales %>
-                Can delete sales
-              </label>
-            </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Select role</label>
+            <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %>
           </div>
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
+
+
+ 
 
 
 
